@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Relógio, Cronômetro e Alarme</title>
+    <style>
+        body {
+            background-image: url('img01.jpg'); /* Caminho para a imagem personalizada */
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: brightness(1.2) contrast(1.1) blur(2px);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Camada de sobreposição para melhorar visibilidade */
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-800 bg-opacity-50 flex flex-col items-center min-h-screen p-10">
+    <div class="overlay"></div> <!-- Adicionando sobreposição escura -->
+
+    <div class="content"> <!-- Conteúdo movido para uma div com z-index superior -->
+        <!-- Seção do Relógio e Data -->
+        <div class="bg-black bg-opacity-70 p-10 rounded-2xl shadow w-full max-w-md text-center text-white mb-10">
+            <h1 class="text-5xl font-bold mb-4">Relógio e Data</h1>
+            <div class="text-6xl font-mono" id="clock">00:00:00</div>
+            <div class="text-3xl mt-2 font-light" id="date">DD/MM/YYYY</div>
+            <div class="text-xl mt-4" id="location">Localização: Carregando...</div>
+        </div>
+
+        <!-- Seção do Cronômetro -->
+        <div class="bg-black bg-opacity-70 p-10 rounded-2xl shadow w-full max-w-md text-center text-white mb-10">
+            <h1 class="text-5xl font-bold mb-4">Cronômetro</h1>
+            <div class="flex justify-center items-center gap-4 mb-4">
+                <input type="number" id="minute-input" class="bg-gray-700 p-2 rounded text-white text-xl" placeholder="Minutos" min="0">
+                <button id="set-timer" class="bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded text-white">Definir Cronômetro</button>
+            </div>
+            <div class="text-6xl font-mono" id="timer">00:00</div>
+            <div class="flex justify-center gap-6 mt-6">
+                <button id="reset" class="flex justify-center items-center w-12 h-12 bg-red-500 hover:bg-red-700 rounded-full">
+                    <i class="fas fa-refresh text-white text-xl"></i>
+                </button>
+                <button id="play" class="flex justify-center items-center w-12 h-12 bg-green-500 hover:bg-green-700 rounded-full group">
+                    <i class="fas fa-play text-white text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Seção do Alarme -->
+        <div class="bg-black bg-opacity-70 p-10 rounded-2xl shadow w-full max-w-md text-center text-white">
+            <h1 class="text-5xl font-bold mb-4">Alarme</h1>
+            <div class="flex justify-center items-center gap-4 mb-4">
+                <input type="time" id="alarm-time" class="bg-gray-700 p-2 rounded text-white text-xl">
+                <button id="set-alarm" class="bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded text-white">Definir Alarme</button>
+            </div>
+            <div id="alarm-status" class="text-xl font-light">Nenhum alarme definido</div>
+            <button id="stop-alarm" class="bg-red-500 hover:bg-red-700 px-4 py-2 rounded text-white hidden">Parar Alarme</button>
+        </div>
+
+        <audio id="rooster-sound" src="clock-alarm-8761.mp3" preload="auto" loop></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
